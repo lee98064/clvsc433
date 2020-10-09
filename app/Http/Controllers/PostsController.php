@@ -20,7 +20,7 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        $post = Post::with('user')->find($id);
+        $post = Post::with('user')->findOrFail($id);
         return view('posts.show',['post' => $post]);
     }
 
@@ -42,12 +42,12 @@ class PostsController extends Controller
 
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return view('posts.edit', ['post' => $post]);    
     }
 
     public function update(Request $request, $id) {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
         $content = $request->validate([
             'title'=> 'required|min:2',
